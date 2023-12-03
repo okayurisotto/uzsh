@@ -1,0 +1,13 @@
+#app {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}
+
+.global-controls {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+}

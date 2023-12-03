@@ -1,0 +1,15 @@
+* {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  margin: unset;
+}
+
+label {
+  user-select: none;
+}
