@@ -5,4 +5,5 @@ export default defineConfig({
   format: "iife",
   minify: true,
   outDir: "./dist-tsup",
+  sourcemap: true,
 });

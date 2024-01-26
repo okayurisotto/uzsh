@@ -10,5 +10,6 @@ export default defineConfig({
         options: resolve(__dirname, "./options.html"),
       },
     },
+    sourcemap: true,
   },
 });
