@@ -1,13 +1,13 @@
+import { z } from "zod";
 import {
   UserEntrySchema,
   UserEntryTypeSchema,
   UserEntryUrlSchema,
   UserEntryWhen,
 } from "../const";
-import { z } from "zod";
+import "./UserEntryForm.css";
 import { CheckboxList } from "./CheckboxList";
 import { OptionsSelect } from "./OptionsSelect";
-import "./UserEntryForm.css";
 
 export const UserEntryForm: preact.FunctionComponent<{
   data: z.infer<typeof UserEntrySchema>;

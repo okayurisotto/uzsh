@@ -1,11 +1,11 @@
 import { createRef } from "preact";
 import { useEffect, useState } from "preact/hooks";
-import { StorageKey, StorageSchema, UserEntrySchema } from "../const";
-import { z } from "zod";
-import { UserEntryForm } from "./UserEntryForm";
-import { Empty } from "../type";
-import "./App.css";
 import { storage } from "webextension-polyfill";
+import { z } from "zod";
+import { StorageKey, StorageSchema, UserEntrySchema } from "../const";
+import type { Empty } from "../type";
+import "./App.css";
+import { UserEntryForm } from "./UserEntryForm";
 
 export const App: preact.FunctionComponent<Empty> = () => {
   const [entries, setEntries] = useState<z.infer<typeof UserEntrySchema>[]>([]);

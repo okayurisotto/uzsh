@@ -1,7 +1,7 @@
 import { singleton, type Disposable } from "tsyringe";
 import { tabs, webNavigation, type WebNavigation } from "webextension-polyfill";
-import { UserEntriesDataManager } from "./UserEntriesDataManager";
 import { webNavigationEventUrlFilter } from "./const";
+import { UserEntriesDataManager } from "./UserEntriesDataManager";
 
 @singleton()
 export class UserScriptsInjector implements Disposable {
