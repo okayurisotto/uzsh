@@ -1,6 +1,7 @@
 import { singleton, type Disposable } from "tsyringe";
 import { tabs, webNavigation, type WebNavigation } from "webextension-polyfill";
 import { UserEntriesDataManager } from "./UserEntriesDataManager";
+import { webNavigationEventUrlFilter } from "./const";
 
 @singleton()
 export class UserScriptsInjector implements Disposable {
@@ -69,10 +70,17 @@ export class UserScriptsInjector implements Disposable {
   ) {}
 
   public activate(): void {
-    webNavigation.onDOMContentLoaded.addListener(this.handleDOMContentLoaded);
-    webNavigation.onCompleted.addListener(this.handleCompleted);
+    webNavigation.onDOMContentLoaded.addListener(
+      this.handleDOMContentLoaded,
+      webNavigationEventUrlFilter,
+    );
+    webNavigation.onCompleted.addListener(
+      this.handleCompleted,
+      webNavigationEventUrlFilter,
+    );
     webNavigation.onHistoryStateUpdated.addListener(
       this.handleHistoryStateUpdated,
+      webNavigationEventUrlFilter,
     );
   }
 
