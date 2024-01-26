@@ -1,7 +1,7 @@
-import { injectable } from "tsyringe";
+import { singleton } from "tsyringe";
 import { UserEntriesInjector } from "./UserEntriesInjector";
 
-@injectable()
+@singleton()
 export class ExtensionActivator {
   constructor(private readonly userEntriesInjector: UserEntriesInjector) {}
 
