@@ -1,8 +1,45 @@
-# uzsh - A minimal userscript & userstyle manager for **Firefox**.
+# [uzsh](https://github.com/okayurisotto/uzsh)
 
-https://github.com/okayurisotto/uzsh
+A minimal userscript & userstyle manager for **Firefox**.
 
-## 概要
+## ビルド方法 - Build
+
+This project requires [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) to build.
+
+My build environment is:
+
+```
+$ node -v
+v20.11.0
+# See also `engines.node` in `package.json`.
+
+$ pnpm -v
+8.14.3
+# See also `packageManager` in `package.json`.
+```
+
+- Apple MacBook Air (2020)
+- macOS Sonoma 14.3
+
+---
+
+The build steps are:
+
+```
+$ pnpm install --frozen-lockfile
+
+$ pnpm run build
+```
+
+Then, `dist-tsup` and `dist-vite` directories will be created under the project root directory.
+
+(If you want to create a ZIP file, run the command below.)
+
+```
+$ zip -r uzsh.zip dist-tsup dist-vite manifest.json README.md
+```
+
+## 内部データ構造 - Internal Data Structures
 
 ```ts
 type UserEntry = {
@@ -24,7 +61,7 @@ type UserEntryType = "executeScript" | "insertCSS";
 type UserEntryWhen = "onDOMContentLoaded" | "onCompleted" | "onHistoryStateUpdated";
 ```
 
-## 権限
+## 権限 - Permissions
 
 ```jsonc
 [
@@ -40,22 +77,6 @@ type UserEntryWhen = "onDOMContentLoaded" | "onCompleted" | "onHistoryStateUpdat
 ]
 ```
 
-## ライセンス
+## ライセンス - License
 
 CC0-1.0
-
-## Manifest V3? Chrome?
-
-いいえ。
-
-###  [scripting API](https://developer.chrome.com/docs/extensions/reference/scripting/)
-
-> If injecting CSS within a page, you can also specify a string to be used in the `css` property. This option is only available for `scripting.insertCSS()`; you can't execute a string using `scripting.executeScript()`.
-
-🤔
-
-### [userScripts API](https://developer.chrome.com/docs/extensions/reference/userScripts/)
-
-> This is coming soon and not yet in a stable release of Chrome
-
-😇
