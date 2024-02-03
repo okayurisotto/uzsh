@@ -9,6 +9,7 @@ import { UserEntryForm } from "./UserEntryForm";
 
 export const App: preact.FunctionComponent<Empty> = () => {
   const [entries, setEntries] = useState<z.infer<typeof UserEntrySchema>[]>([]);
+  const [unsaved, setUnsaved] = useState<boolean>(false);
 
   useEffect(() => {
     void (async () => {
@@ -28,6 +29,8 @@ export const App: preact.FunctionComponent<Empty> = () => {
         source: "",
       },
     ]);
+
+    setUnsaved(true);
   };
 
   const handleSave = async () => {
@@ -37,6 +40,8 @@ export const App: preact.FunctionComponent<Empty> = () => {
         url: entry.url.source,
       })),
     });
+
+    setUnsaved(false);
   };
 
   const handleExport = () => {
@@ -93,6 +98,8 @@ export const App: preact.FunctionComponent<Empty> = () => {
         return source.findIndex((current) => current.id === entry.id) === index;
       }),
     );
+
+    await handleSave();
   };
 
   const importFileInputRef = createRef<HTMLInputElement>();
@@ -100,7 +107,9 @@ export const App: preact.FunctionComponent<Empty> = () => {
     <>
       <div class="global-controls">
         <button onClick={handleAdd}>エントリを新規作成</button>
-        <button onClick={() => void handleSave()}>設定を保存</button>
+        <button disabled={!unsaved} onClick={() => void handleSave()}>
+          設定を保存
+        </button>
         <button onClick={handleExport}>設定をエクスポート</button>
         <button
           onClick={() => {
@@ -136,9 +145,11 @@ export const App: preact.FunctionComponent<Empty> = () => {
                 return newValue;
               }),
             );
+            setUnsaved(true);
           }}
           handleDelete={() => {
             setEntries(entries.filter((entry) => entry.id !== value.id));
+            setUnsaved(true);
           }}
         />
       ))}
