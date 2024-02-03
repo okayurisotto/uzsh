@@ -15,6 +15,7 @@ export class UserStylesInjector implements Disposable {
         .filter((script) => {
           if (script.type !== "insertCSS") return false;
           if (!script.when.includes("onDOMContentLoaded")) return false;
+          if (!script.url.test(args.url)) return false;
           return true;
         })
         .map(async (target) => {
@@ -35,6 +36,7 @@ export class UserStylesInjector implements Disposable {
         .filter((script) => {
           if (script.type !== "insertCSS") return false;
           if (!script.when.includes("onCompleted")) return false;
+          if (!script.url.test(args.url)) return false;
           return true;
         })
         .map(async (target) => {
@@ -55,6 +57,7 @@ export class UserStylesInjector implements Disposable {
         .filter((script) => {
           if (script.type !== "insertCSS") return false;
           if (!script.when.includes("onHistoryStateUpdated")) return false;
+          if (!script.url.test(args.url)) return false;
           return true;
         })
         .map(async (target) => {
