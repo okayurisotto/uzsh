@@ -33,7 +33,7 @@ export const App: preact.FunctionComponent<Empty> = () => {
     setUnsaved(true);
   };
 
-  const handleSave = async () => {
+  const handleSave = async (entries: z.infer<typeof UserEntrySchema>[]) => {
     await storage.local.set({
       [StorageKey.UserEntries]: entries.map((entry) => ({
         ...entry,
@@ -87,19 +87,18 @@ export const App: preact.FunctionComponent<Empty> = () => {
       })
       .parse(JSON.parse(json));
 
-    setEntries(
-      [
-        ...data.entries.map((entry) => ({
-          ...entry,
-          url: new RegExp(entry.url),
-        })),
-        ...entries,
-      ].filter((entry, index, source) => {
-        return source.findIndex((current) => current.id === entry.id) === index;
-      }),
-    );
+    const newEntries = [
+      ...data.entries.map((entry) => ({
+        ...entry,
+        url: new RegExp(entry.url),
+      })),
+      ...entries,
+    ].filter((entry, index, source) => {
+      return source.findIndex((current) => current.id === entry.id) === index;
+    });
 
-    await handleSave();
+    setEntries(newEntries);
+    await handleSave(newEntries);
   };
 
   const importFileInputRef = createRef<HTMLInputElement>();
@@ -107,7 +106,7 @@ export const App: preact.FunctionComponent<Empty> = () => {
     <>
       <div class="global-controls">
         <button onClick={handleAdd}>エントリを新規作成</button>
-        <button disabled={!unsaved} onClick={() => void handleSave()}>
+        <button disabled={!unsaved} onClick={() => void handleSave(entries)}>
           設定を保存
         </button>
         <button onClick={handleExport}>設定をエクスポート</button>
