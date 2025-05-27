@@ -9,20 +9,20 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@swc/core": "^1.4.17",
+    "@swc/core": "^1.11.29",
     "@tsconfig/strictest": "^2.0.5",
     "@types/node": "^22.15.21",
-    "@types/webextension-polyfill": "^0.10.7",
-    "prettier": "^3.2.5",
-    "tsup": "^8.0.2",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.10"
+    "@types/webextension-polyfill": "^0.12.3",
+    "prettier": "^3.5.3",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
   },
   "dependencies": {
-    "preact": "^10.20.2",
+    "preact": "^10.26.7",
     "reflect-metadata": "^0.2.2",
-    "tsyringe": "^4.8.0",
-    "webextension-polyfill": "^0.11.0",
-    "zod": "^3.23.5"
+    "tsyringe": "^4.10.0",
+    "webextension-polyfill": "^0.12.0",
+    "zod": "^3.25.30"
   }
 }
